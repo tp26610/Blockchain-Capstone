@@ -12,3 +12,16 @@ The capstone will build upon the knowledge you have gained in the course in orde
 * [Interactive zero knowledge 3-colorability demonstration](http://web.mit.edu/~ezyang/Public/graph/svg.html)
 * [Docker](https://docs.docker.com/install/)
 * [ZoKrates](https://github.com/Zokrates/ZoKrates)
+
+# Versions
+
+```bash
+$ truffle version
+Truffle v5.0.6 (core: 5.0.6)
+Solidity - 0.5.2 (solc-js)
+Node v11.15.0
+
+$ npm -v
+6.7.0
+```
+
