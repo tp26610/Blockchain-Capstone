@@ -40,7 +40,7 @@ contract Ownable {
         _owner = newOwner;
     }
 
-    function getOwner() public view returns (address) {
+    function owner() public view returns (address) {
         return _owner;
     }
 }
@@ -600,16 +600,21 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
         return _tokenURIs[tokenId];
     }
 
-    // TODO: Create an internal function to set the tokenURI of a specified tokenId
+    // Create an internal function to set the tokenURI of a specified tokenId
     // It should be the _baseTokenURI + the tokenId in string form
     // TIP #1: use strConcat() from the imported oraclizeAPI lib to set the complete token URI
     // TIP #2: you can also use uint2str() to convert a uint to a string
     // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat()
     // require the token exists before setting
-    function setTokenURI(uint256 tokenId) internal {}
+    function setTokenURI(uint256 tokenId) internal {
+        require(_exists(tokenId));
+        string memory tokenIdStr = uint2str(tokenId);
+        string memory uri = strConcat(_baseTokenURI, tokenIdStr);
+        _tokenURIs[tokenId] = uri;
+    }
 }
 
-//  TODO's: Create CustomERC721Token contract that inherits from the ERC721Metadata contract. You can name this contract as you please
+//  Create CustomERC721Token contract that inherits from the ERC721Metadata contract. You can name this contract as you please
 //  1) Pass in appropriate values for the inherited ERC721Metadata contract
 //      - make the base token uri: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/
 //  2) create a public mint() that does the following:
@@ -617,3 +622,19 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //      -takes in a 'to' address, tokenId, and tokenURI as parameters
 //      -returns a true boolean upon completion of the function
 //      -calls the superclass mint and setTokenURI functions
+contract ERC721MintableComplete is Pausable, ERC721Metadata {
+    constructor()
+        public
+        ERC721Metadata(
+            "Brian Udacity Token",
+            "BUT",
+            "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/"
+        )
+    {}
+
+    function mint(address to, uint256 tokenId) public onlyOwner returns (bool) {
+        _mint(to, tokenId);
+        setTokenURI(tokenId);
+        return true;
+    }
+}
