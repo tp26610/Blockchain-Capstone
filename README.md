@@ -4,6 +4,7 @@ The capstone will build upon the knowledge you have gained in the course in orde
 
 # Project Resources
 
+* [Capstone: Real Estate Marketplace Project FAQ — Udacity Blockchain](https://andresaaap.medium.com/capstone-real-estate-marketplace-project-faq-udacity-blockchain-69fe13b4c14e)
 * [Remix - Solidity IDE](https://remix.ethereum.org/)
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [Truffle Framework](https://truffleframework.com/)
