@@ -27,18 +27,18 @@ $ npm -v
 
 # Run zkrates
 
-Setup docker
-```bash
-$ docker pull zokrates/zokrates:0.4.5
-```
+
 
 ```bash
+# Setup docker
 $ PROJ_PATH=<ABSOLUTE_PATH>
 # PROJ_PATH=~/Code/Practices/Blockchain/Capstone
 $ cd $PROJ_PATH
-$ docker run -v $PROJ_PATH/zokrates/code:/home/zokrates/code -ti zokrates/zokrates:0.4.5 /bin/bash
+$ docker run -v $PROJ_PATH/zokrates/code:/home/zokrates/code -ti zokrates/zokrates:0.3.0 /bin/bash
 
-$ ~/zokrates -V
+# Run following command in the docker container
+
+$ ~/zokrates -V # check the zokrates version is 0.3.0
 ZoKrates 0.3.0
 
 # compile

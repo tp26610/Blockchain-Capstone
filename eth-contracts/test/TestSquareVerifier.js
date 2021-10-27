@@ -7,7 +7,7 @@ contract('SquareVerifier', (accounts) => {
 
   beforeEach(async () => {
     contract = await SquareVerifier.new({ from: accounts[0] });
-    console.log(JSON.stringify(proof, null, 2));
+    // console.log(JSON.stringify(proof, null, 2));
   });
 
   it('test verification with correct proof', async () => {
@@ -28,7 +28,20 @@ contract('SquareVerifier', (accounts) => {
     assert.equal(result, true);
   });
 
-  // it('test verification with incorrect proof', () => {
-  //   // Test verification with incorrect proof
-  // });
+  it('test verification with incorrect proof', async () => {
+    // Test verification with incorrect proof
+    const cheatInput = [123, 123];
+    const result = await contract.verifyTx.call(
+      proof.proof.A,
+      proof.proof.A_p,
+      proof.proof.B,
+      proof.proof.B_p,
+      proof.proof.C,
+      proof.proof.C_p,
+      proof.proof.H,
+      proof.proof.K,
+      cheatInput
+    );
+    assert.equal(result, false);
+  });
 });
