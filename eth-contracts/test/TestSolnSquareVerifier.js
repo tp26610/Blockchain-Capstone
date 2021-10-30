@@ -3,6 +3,7 @@
 const SquareVerifier = artifacts.require('SquareVerifier');
 const SolnSquareVerifier = artifacts.require('SolnSquareVerifier');
 const proof = require('../../zokrates/code/square/proof.json');
+const EventTester = require('./EventTester');
 
 contract('SolnSquareVerifer', (accounts) => {
   let verifier;
@@ -68,4 +69,18 @@ contract('SolnSquareVerifer', (accounts) => {
     assert.equal(isReverted, true);
   });
 
+  it('emits SolutionAdded event if a solution is submited', async () => {
+    // listen event SolutionAdded
+    const eventTester = new EventTester();
+    eventTester.listenEvent(soln.SolutionAdded());
+
+    // do action
+    await mintWithValidProof1();
+
+    // assert SolutionAdded event emitted
+    const event = await eventTester.waitEvent();
+    assert.equal(event.event, 'SolutionAdded');
+    assert.equal(event.args.index, 1);
+    assert.equal(event.args.account, accounts[0]);
+  });
 });

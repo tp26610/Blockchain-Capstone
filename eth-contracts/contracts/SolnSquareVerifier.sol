@@ -42,7 +42,7 @@ contract SolnSquareVerifier is ERC721MintableComplete {
 
     // Create a function to add the solutions to the array and emit the event
     function addSolution(bytes32 solutionHash, address account) private {
-        uint256 solutionIndex = solutions.length;
+        uint256 solutionIndex = solutions.length + 1;
         solutions.push(Solution(solutionIndex, account));
         submittedSolutions[solutionHash] = true;
         emit SolutionAdded(solutionIndex, account);
