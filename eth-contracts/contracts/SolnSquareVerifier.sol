@@ -32,7 +32,7 @@ contract SolnSquareVerifier is ERC721MintableComplete {
     mapping(bytes32 => bool) private submittedSolutions;
 
     // Create an event to emit when a solution is added
-    event SolutionAdded(bytes32 index, address account);
+    event SolutionAdded(uint256 index, address account);
 
     Verifier verifier;
 
@@ -41,10 +41,11 @@ contract SolnSquareVerifier is ERC721MintableComplete {
     }
 
     // Create a function to add the solutions to the array and emit the event
-    function addSolution(bytes32 index, address account) private {
-        solutions.push(Solution(solutions.length, account));
-        submittedSolutions[index] = true;
-        emit SolutionAdded(index, account);
+    function addSolution(bytes32 solutionHash, address account) private {
+        uint256 solutionIndex = solutions.length;
+        solutions.push(Solution(solutionIndex, account));
+        submittedSolutions[solutionHash] = true;
+        emit SolutionAdded(solutionIndex, account);
     }
 
     // Create a function to mint new NFT only after the solution has been verified
