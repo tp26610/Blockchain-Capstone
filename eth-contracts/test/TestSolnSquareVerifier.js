@@ -2,7 +2,7 @@
 // Test if an ERC721 token can be minted for contract - SolnSquareVerifier
 const SquareVerifier = artifacts.require('SquareVerifier');
 const SolnSquareVerifier = artifacts.require('SolnSquareVerifier');
-const proof = require('../../zokrates/code/square/proof.json');
+const proof = require('../../zokrates/code/square/proof1.json');
 const EventTester = require('./EventTester');
 
 contract('SolnSquareVerifer', (accounts) => {
